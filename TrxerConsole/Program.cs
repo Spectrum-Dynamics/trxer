@@ -5,9 +5,19 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Xsl;
 
+
 namespace TrxerConsole
 {
-    class Program
+
+        public class Trxer
+        {
+            public static void Transform(string arg)
+            {
+                TrxerConsole.Program.CreateReport(arg);
+            }
+        }
+
+        class Program
     {
         /// <summary>
         /// Embedded Resource name
@@ -33,12 +43,23 @@ namespace TrxerConsole
             Transform(args[0], PrepareXsl());
         }
 
-        /// <summary>
-        /// Transforms trx int html document using xslt
-        /// </summary>
-        /// <param name="fileName">Trx file path</param>
-        /// <param name="xsl">Xsl document</param>
-        private static void Transform(string fileName, XmlDocument xsl)
+            internal static void CreateReport(string args)
+            {
+                if (string.IsNullOrWhiteSpace(args) || !System.IO.File.Exists(args))
+                {
+                    Console.WriteLine($"No trx file found:{args}");
+                    return;
+                }
+
+                Transform(args, PrepareXsl());
+            }
+
+            /// <summary>
+            /// Transforms trx int html document using xslt
+            /// </summary>
+            /// <param name="fileName">Trx file path</param>
+            /// <param name="xsl">Xsl document</param>
+            private static void Transform(string fileName, XmlDocument xsl)
         {
             XslCompiledTransform x = new XslCompiledTransform(true);
             x.Load(xsl, new XsltSettings(true, true), null);
