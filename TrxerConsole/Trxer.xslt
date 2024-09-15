@@ -408,7 +408,7 @@
               </xsl:for-each>
               <tr>
                 <td colspan="5">
-                  <h6>TRX Html Viewer log - Niv Navick 2015</h6>
+                  <h6>Spectrum Dyanamics Medical</h6>
                 </td>
               </tr>
             </tbody>
